@@ -1,0 +1,118 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Coba API",
+        "description": "Dokumentasi API Testing Menggunakan Swagger Studi Kasus API Reqres",
+        "version": "1.0.0"
+    },
+    "host": "reqres.in",
+    "basePath": "/api",
+    "schemes": ["https", "http"],
+
+
+    "paths": {
+        "/colors": {
+            "get": {
+                "tags": [
+                    "Colors"
+                ],
+                "summary": "Ambil semua warna",
+                "prodecus": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": ["List Users"],
+                "summary": "Tampilkan semua user",
+                "prodecus": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": { "description": "Success" }
+                }
+            },
+            "post": {
+                "tags": ["Create New User"],
+                "summary": "Menambah User Baru",
+                "produces": ["application/json"],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Inputkan nama dan pekerjaan user baru",
+                    "required": true
+                }],
+                "responses": { "201": { "description": "Berhasil Menambahkan User Baru" } }
+            },
+            "delete": {
+                "tags": ["Delete Users"],
+                "summary": "Hapus User Sesuai ID",
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "ID User",
+                    "in": "path",
+                    "description": "ID of the user that needs to be deleted",
+                    "required": true,
+                    "type": "integer",
+                    "minimum": 1,
+                    "format": "int64"
+                }],
+                "responses": {
+                    "204": { "description": "No Content" },
+                    "400": { "description": "ID User tidak valid" },
+                    "404": { "description": "User tidak ditemukan" }
+                }
+            }
+        },
+        "/users/{ID}": {
+            "put": {
+                "tags": ["Update Users"],
+                "summary": "Updated user",
+                "description": "Update data user sesuai dengan ID",
+                "operationId": "updateUser",
+                "consumes": ["application/json"],
+                "produces": ["application/json", "application/xml"],
+                "parameters": [{
+                    "name": "ID",
+                    "in": "path",
+                    "description": "ID User yang ingin diupdate",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "in": "body",
+                    "name": "Data Update",
+                    "description": "Updated user",
+                    "required": true,
+                    "schema": { "$ref": "#/definitions/User" }
+                }],
+                "responses": {
+                    "200": { "description": "Berhasil Update User" },
+                    "404": { "description": "User tidak ditemukan" }
+                }
+            }
+        },
+
+        "/unknown": {
+            "get": {
+                "tags": ["LIST <RESOURCE>"],
+                "summary": "Menampilkan List Data",
+                "prodecus": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        }
+
+
+    }
+}
